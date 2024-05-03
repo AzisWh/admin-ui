@@ -5,6 +5,7 @@ import New from "./pages/new/new";
 import Single from "./pages/single/single";
 import Login from "./pages/login/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Mylist from "./pages/mylist/Mylist";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path=":productsId" element={<Single />}></Route>
               <Route path="new" element={<New />}></Route>
             </Route>
+            <Route path="mylist" element={<Mylist />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

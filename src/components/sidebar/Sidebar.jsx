@@ -7,6 +7,7 @@ import Inventory2Icon from "@mui/icons-material/Inventory2";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PortraitIcon from "@mui/icons-material/Portrait";
 import LogoutIcon from "@mui/icons-material/Logout";
+import CategoryIcon from "@mui/icons-material/Category";
 
 const Sidebar = () => {
   return (
@@ -20,10 +21,12 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/">
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p className="title">LIST</p>
           <Link to="/users">
             <li>
@@ -37,10 +40,17 @@ const Sidebar = () => {
               <span>Products</span>
             </li>
           </Link>
+
           <li>
             <ShoppingCartIcon className="icon" />
             <span>Orders</span>
           </li>
+          <Link to="/mylist">
+            <li>
+              <CategoryIcon className="icon" />
+              <span>Categories</span>
+            </li>
+          </Link>
           <p className="title">USER</p>
           <li>
             <PortraitIcon className="icon" />
