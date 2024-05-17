@@ -1,7 +1,15 @@
 import "./single.scss";
 
 const Single = () => {
-  return <div>Halaman Single</div>;
+  return (
+    <div className="single">
+      <Sidebar />
+      <div className="singleContainer">
+        <Navbar />
+        <Datatable />
+      </div>
+    </div>
+  );
 };
 
 export default Single;

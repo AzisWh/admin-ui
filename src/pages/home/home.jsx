@@ -21,9 +21,9 @@ const Home = () => {
           <Chart type="order" aspect={2 / 1} />
           <Chart type="earning" aspect={2 / 1} />
         </div>
-        {/* <div className="datatable">
+        <div className="datatable">
           <Datatable />
-        </div> */}
+        </div>
       </div>
     </div>
   );
