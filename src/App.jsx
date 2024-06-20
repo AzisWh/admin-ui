@@ -4,15 +4,27 @@ import List from "./pages/list/list";
 import New from "./pages/new/new";
 import Single from "./pages/single/single";
 import Login from "./pages/login/login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Mylist from "./pages/mylist/Mylist";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { productInputs, userInputs } from "./formsource";
+import MyList from "./pages/mylist/Mylist";
 // darkmode
 import "./style/darkmode.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+
+  const { currentUser } = useContext(AuthContext);
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/login" />;
+  };
+
+  const NotRequireAuth = ({ children }) => {
+    return currentUser ? <Navigate to="/" /> : children;
+  };
 
   return (
     <>
@@ -20,19 +32,84 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/">
-              <Route index element={<Home />}></Route>
-              <Route path="login" element={<Login />}></Route>
+              <Route
+                path="login"
+                element={
+                  <NotRequireAuth>
+                    <Login />
+                  </NotRequireAuth>
+                }
+              ></Route>
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Home />
+                  </RequireAuth>
+                }
+              ></Route>
               <Route path="users">
-                <Route index element={<List />}></Route>
-                <Route path=":userId" element={<Single />}></Route>
-                <Route path="new" element={<New />}></Route>
+                <Route
+                  index
+                  element={
+                    <RequireAuth>
+                      <List />
+                    </RequireAuth>
+                  }
+                ></Route>
+                <Route
+                  path=":userId"
+                  element={
+                    <RequireAuth>
+                      <Single />
+                    </RequireAuth>
+                  }
+                ></Route>
+                <Route
+                  path="new"
+                  element={
+                    <RequireAuth>
+                      <New inputs={userInputs} title="Add New User" />
+                    </RequireAuth>
+                  }
+                />
               </Route>
               <Route path="products">
-                <Route index element={<List />}></Route>
-                <Route path=":productsId" element={<Single />}></Route>
-                <Route path="new" element={<New />}></Route>
+                <Route
+                  index
+                  element={
+                    <RequireAuth>
+                      <List />
+                    </RequireAuth>
+                  }
+                ></Route>
+                <Route
+                  path=":productId"
+                  element={
+                    <RequireAuth>
+                      <Single />
+                    </RequireAuth>
+                  }
+                ></Route>
+                <Route
+                  path="new"
+                  element={
+                    <RequireAuth>
+                      <New inputs={productInputs} title="Add New Product" />
+                    </RequireAuth>
+                  }
+                />
               </Route>
-              <Route path="mylist" element={<Mylist />}></Route>
+              <Route path="categories">
+                <Route
+                  index
+                  element={
+                    <RequireAuth>
+                      <MyList />
+                    </RequireAuth>
+                  }
+                ></Route>
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

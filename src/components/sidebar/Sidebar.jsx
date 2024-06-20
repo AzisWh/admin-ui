@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -10,13 +10,33 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CategoryIcon from "@mui/icons-material/Category";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase";
+import { AuthContext } from "../../context/AuthContext";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+
+  const { dispatch: authDispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        authDispatch({ type: "LOGOUT" });
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/">
+          <span className="logo" id="logo2">
+            Awikwok
+          </span>
           <span className="logo">Store</span>
         </Link>
       </div>
@@ -60,7 +80,7 @@ const Sidebar = () => {
             <PortraitIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={handleLogout}>
             <LogoutIcon className="icon" />
             <span>Logout</span>
           </li>
