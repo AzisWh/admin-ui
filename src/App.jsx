@@ -43,34 +43,34 @@ function App() {
               <Route
                 index
                 element={
-                  <RequireAuth>
+                  <NotRequireAuth>
                     <Home />
-                  </RequireAuth>
+                  </NotRequireAuth>
                 }
               ></Route>
               <Route path="users">
                 <Route
                   index
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <List />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 ></Route>
                 <Route
                   path=":userId"
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <Single />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 ></Route>
                 <Route
                   path="new"
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <New inputs={userInputs} title="Add New User" />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 />
               </Route>
@@ -78,25 +78,25 @@ function App() {
                 <Route
                   index
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <List />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 ></Route>
                 <Route
                   path=":productId"
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <Single />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 ></Route>
                 <Route
                   path="new"
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <New inputs={productInputs} title="Add New Product" />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 />
               </Route>
@@ -104,9 +104,9 @@ function App() {
                 <Route
                   index
                   element={
-                    <RequireAuth>
+                    <NotRequireAuth>
                       <MyList />
-                    </RequireAuth>
+                    </NotRequireAuth>
                   }
                 ></Route>
               </Route>

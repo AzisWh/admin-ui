@@ -19,7 +19,13 @@ const columns = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
+    valueGetter: (params) => {
+      // Ensure params and params.row are defined
+      if (!params || !params.row) {
+        return "";
+      }
+      return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+    },
   },
 ];
 
@@ -35,7 +41,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-const actionColumn = [
+const actionColumn = (type) => [
   {
     field: "action",
     headerName: "Action",
@@ -43,7 +49,7 @@ const actionColumn = [
     renderCell: () => {
       return (
         <div className="cellAction">
-          <Link to={"/" + type + "/test"} style={{ textDecoration: "none" }}>
+          <Link to={`/${type}/test`} style={{ textDecoration: "none" }}>
             <span className="viewButton">View</span>
           </Link>
         </div>
@@ -60,14 +66,14 @@ const Datatable = () => {
     <div className="datatable">
       <div className="datatableTitle">
         {type.toUpperCase()}
-        <Link to={"/" + type + "/new"} className="link">
+        <Link to={`/${type}/new`} className="link">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
         rows={rows}
-        columns={columns.concat(actionColumn)}
+        columns={columns.concat(actionColumn(type))}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
