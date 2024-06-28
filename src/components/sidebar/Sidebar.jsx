@@ -19,6 +19,8 @@ const Sidebar = () => {
 
   const { dispatch: authDispatch } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
