@@ -3,7 +3,7 @@ import "./mylist.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Widget from "../../components/widget/Widget";
-import MyDatatable from "../../components/mydatatable/MyDatatable";
+import Datatable from "../../components/datatable/Datatable";
 import { Link } from "react-router-dom";
 
 const Mylist = ({ columns }) => {
@@ -24,7 +24,7 @@ const Mylist = ({ columns }) => {
           </Link>
         </div>
         <div className="datatable">
-          <MyDatatable title="All Categories" columns={columns} />
+          <Datatable columns={columns} />
         </div>
       </div>
     </div>
