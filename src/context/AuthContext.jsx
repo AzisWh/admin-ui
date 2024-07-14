@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer";
+import { auth } from "../Firebase";
 
 const INITIAL_STATE = {
   currentUser: null,

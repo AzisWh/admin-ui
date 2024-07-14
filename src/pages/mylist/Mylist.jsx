@@ -3,10 +3,10 @@ import "./mylist.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Widget from "../../components/widget/Widget";
-import Chart from "../../components/Chart/Chart";
 import MyDatatable from "../../components/mydatatable/MyDatatable";
+import { Link } from "react-router-dom";
 
-const Mylist = () => {
+const Mylist = ({ columns }) => {
   return (
     <div className="mylist">
       <Sidebar />
@@ -14,13 +14,17 @@ const Mylist = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          <Widget type="product" />
+          <Widget type="category" />
         </div>
-
+        <div className="datatableTitle">
+          <h1>Categories</h1>
+          <Link to="/categories/new" className="link">
+            Add New
+          </Link>
+        </div>
         <div className="datatable">
-          <MyDatatable title="All Data" />
+          <MyDatatable title="All Categories" columns={columns} />
         </div>
       </div>
     </div>

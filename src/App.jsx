@@ -5,15 +5,16 @@ import New from "./pages/new/new";
 import Single from "./pages/single/single";
 import Login from "./pages/login/login";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs } from "./formsource";
-import MyList from "./pages/mylist/Mylist";
+import { productInputs, userInputs, categoryInputs } from "./formsource";
+import Mylist from "./pages/mylist/Mylist";
+import NewCategory from "./pages/new/newCategory";
 // darkmode
 import "./style/darkmode.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 // datatable
-import { userColumns, productColumns } from "./datatablesource";
+import { userColumns, productColumns, categoryColumns } from "./datatablesource";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -45,34 +46,34 @@ function App() {
               <Route
                 index
                 element={
-                  <NotRequireAuth>
+                  <RequireAuth>
                     <Home />
-                  </NotRequireAuth>
+                  </RequireAuth>
                 }
               ></Route>
               <Route path="users">
                 <Route
                   index
                   element={
-                    <NotRequireAuth>
+                    <RequireAuth>
                       <List columns={userColumns} />
-                    </NotRequireAuth>
+                    </RequireAuth>
                   }
                 ></Route>
                 <Route
                   path=":userId"
                   element={
-                    <NotRequireAuth>
+                    <RequireAuth>
                       <Single columns={userColumns} />
-                    </NotRequireAuth>
+                    </RequireAuth>
                   }
                 ></Route>
                 <Route
                   path="new"
                   element={
-                    <NotRequireAuth>
+                    <RequireAuth>
                       <New inputs={userInputs} title="Add New User" />
-                    </NotRequireAuth>
+                    </RequireAuth>
                   }
                 />
               </Route>
@@ -80,25 +81,25 @@ function App() {
                 <Route
                   index
                   element={
-                    <NotRequireAuth>
-                      <List columns={userColumns} />
-                    </NotRequireAuth>
+                    <RequireAuth>
+                      <List columns={productColumns} />
+                    </RequireAuth>
                   }
                 ></Route>
                 <Route
                   path=":productId"
                   element={
-                    <NotRequireAuth>
+                    <RequireAuth>
                       <Single columns={userColumns} />
-                    </NotRequireAuth>
+                    </RequireAuth>
                   }
                 ></Route>
                 <Route
                   path="new"
                   element={
-                    <NotRequireAuth>
+                    <RequireAuth>
                       <New inputs={productInputs} title="Add New Product" />
-                    </NotRequireAuth>
+                    </RequireAuth>
                   }
                 />
               </Route>
@@ -106,11 +107,19 @@ function App() {
                 <Route
                   index
                   element={
-                    <NotRequireAuth>
-                      <MyList />
-                    </NotRequireAuth>
+                    <RequireAuth>
+                      <Mylist columns={categoryColumns} />
+                    </RequireAuth>
                   }
                 ></Route>
+                <Route
+                  path="new"
+                  element={
+                    <RequireAuth>
+                      <NewCategory inputs={categoryInputs} title="Add New Category" />
+                    </RequireAuth>
+                  }
+                />
               </Route>
             </Route>
           </Routes>

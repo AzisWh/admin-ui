@@ -25,6 +25,12 @@ const New = ({ inputs, title }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+
+    if (!type) {
+      console.error("Type is undefined");
+      return;
+    }
+
     try {
       switch (type) {
         case "users":
@@ -43,7 +49,7 @@ const New = ({ inputs, title }) => {
       }
       navigate(-1);
     } catch (err) {
-      console.log(err);
+      console.log("Error adding document: ", err);
     }
   };
 

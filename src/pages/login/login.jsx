@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { DarkModeContext } from "../../context/darkModeContext";
 import pemkotImg from "../../assets/pemkot.png";
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const { dispatch } = useContext(AuthContext);
+  const { darkMode, dispatch: darkModeDispatch } = useContext(DarkModeContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -40,6 +42,9 @@ const Login = () => {
         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
         <button type="submit">Login</button>
         {error && <span>{error}</span>}
+        <div className="theme-toggle" onClick={() => darkModeDispatch({ type: "TOGGLE" })}>
+          {darkMode ? "🌞" : "🌜"}
+        </div>
       </form>
     </div>
   );

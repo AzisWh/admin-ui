@@ -71,7 +71,7 @@ const Sidebar = () => {
             <ShoppingCartIcon className="icon" />
             <span>Orders</span>
           </li>
-          <Link to="/mylist">
+          <Link to="/categories">
             <li>
               <CategoryIcon className="icon" />
               <span>Categories</span>
